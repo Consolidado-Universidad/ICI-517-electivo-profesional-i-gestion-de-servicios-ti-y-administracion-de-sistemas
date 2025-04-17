@@ -1,0 +1,15 @@
+services:
+    dnsserver:
+        image: ubuntu/bind9:tallerdns01-servidor
+        container_name: dnsserver
+        networks:
+            - tallerdns
+    dnsclient:
+        image: ubuntu:tallerdns01-cliente
+        container_name: dnsclient
+        stdin_open: true
+        networks:
+            - tallerdns
+
+networks:
+    tallerdns:

@@ -1,0 +1,15 @@
+$TTL    604800
+@       IN      SOA     ns1.marcoaravena.cl. admin.marcoaravena.cl. (
+                        2       ; Serial
+                        604800  ; Refresh
+                        86400   ; Retry
+                        2419200 ; Expire
+                        604800 ) ; Negative Cache TTL
+;
+@       IN      NS      ns1.marcoaravena.cl.
+ns1     IN      A       192.168.1.10
+www     IN      A       192.168.1.20
+
+
+
+
