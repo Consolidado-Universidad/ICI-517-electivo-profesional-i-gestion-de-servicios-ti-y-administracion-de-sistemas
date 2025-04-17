@@ -1,0 +1,26 @@
+services:
+  dnsserver:
+    build:
+      context: ./
+      dockerfile: Dockerfile-servidorDNS
+    image: ubuntu/bind9:tallerdns01-servidor
+    container_name: dnsserver
+    volumes:
+      - ./data:/data
+    networks:
+      - tallerdns
+
+  dnsclient:
+    build:
+      context: ./
+      dockerfile: Dockerfile-clienteDNS
+    image: ubuntu:tallerdns01-cliente
+    container_name: dnsclient
+    stdin_open: true
+    volumes:
+      - ./data:/data
+    networks:
+      - tallerdns
+
+networks:
+  tallerdns:
