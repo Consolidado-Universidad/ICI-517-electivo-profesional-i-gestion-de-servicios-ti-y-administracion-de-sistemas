@@ -1,0 +1,8 @@
+// Servidor Esclavo DNS
+
+// Configuración de zona para kevindiaz.cl
+zone "kevindiaz.cl" {
+   type slave;
+   masters { 172.28.1.2; };  // IP del maestro
+   file "/var/cache/bind/db.kevindiaz.cl";
+};

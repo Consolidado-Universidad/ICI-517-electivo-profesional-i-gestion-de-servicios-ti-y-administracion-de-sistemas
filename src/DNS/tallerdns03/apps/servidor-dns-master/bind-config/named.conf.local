@@ -1,0 +1,8 @@
+// Servidor Maestro DNS
+
+// Configuración de zona para kevindiaz.cl
+zone "kevindiaz.cl" {
+   type master;
+   file "/etc/bind/zones/db.kevindiaz.cl";
+   allow-transfer { 172.28.1.3; };  // IP del esclavo
+};

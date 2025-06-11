@@ -1,0 +1,53 @@
+services:
+  servidor-dns-master:
+    build:
+      context: ./apps/servidor-dns-master
+      dockerfile: Dockerfile
+    image: bind9:master
+    container_name: servidor-dns-master
+    stdin_open: true
+    tty: true
+    volumes:
+      - bind-master-keys:/var/lib/bind
+    networks:
+      tallerdns:
+        ipv4_address: 172.28.1.2
+
+  servidor-dns-slave:
+    build:
+      context: ./apps/servidor-dns-slave
+      dockerfile: Dockerfile
+    image: bind9:slave
+    container_name: servidor-dns-slave
+    stdin_open: true
+    tty: true
+    volumes:
+      - bind-slave-keys:/var/lib/bind
+      - bind-slave-cache:/var/cache/bind
+    networks:
+      tallerdns:
+        ipv4_address: 172.28.1.3
+
+  cliente-dns:
+    build:
+      context: ./apps/cliente-dns
+      dockerfile: Dockerfile
+    image: ubuntu:tallerdns01-cliente
+    container_name: cliente-dns
+    stdin_open: true
+    tty: true
+    networks:
+      tallerdns:
+        ipv4_address: 172.28.1.4
+
+networks:
+  tallerdns:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.28.0.0/16
+
+volumes:
+  bind-master-keys:
+  bind-slave-keys:
+  bind-slave-cache:
