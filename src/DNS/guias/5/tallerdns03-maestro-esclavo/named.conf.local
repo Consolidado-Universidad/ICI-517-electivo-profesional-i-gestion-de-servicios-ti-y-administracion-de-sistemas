@@ -1,0 +1,5 @@
+
+zone "marcoaravena.cl"
+{  type master; 
+   file "/etc/bind/marcoaravena.cl"; };
+

@@ -1,0 +1,38 @@
+services:
+    dnsserver-maestro:
+        image: ubuntu/bind9:tallerdns01-servidor
+        container_name: dnsserver-maestro
+        volumes:
+            - ${PWD}/named.conf.local.maestro:/etc/bind/named.conf.local
+            - ${PWD}/master:/etc/bind/master
+        networks:
+            tallerdns:
+                ipv4_address: 172.25.0.10
+
+    dnsserver-esclavo:
+        image: ubuntu/bind9:tallerdns01-servidor
+        container_name: dnsserver-esclavo
+        volumes:
+            - ${PWD}/named.conf.local.esclavo:/etc/bind/named.conf.local
+            - ${PWD}/slave:/etc/bind/slave
+            
+        networks:
+            tallerdns:
+                ipv4_address: 172.25.0.11
+
+
+    dnsclient:
+        image: ubuntu:tallerdns01-cliente
+        container_name: dnsclient
+        stdin_open: true
+        networks:
+            tallerdns:
+                ipv4_address: 172.25.0.150
+
+networks:
+    tallerdns:
+        ipam:
+            driver: default
+            config:
+              - subnet: 172.25.0.0/24 
+

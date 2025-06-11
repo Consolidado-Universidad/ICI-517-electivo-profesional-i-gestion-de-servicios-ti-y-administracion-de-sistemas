@@ -1,0 +1,7 @@
+
+zone "marcoaravena.cl"
+{  type master; 
+   file "/etc/bind/master/marcoaravena.cl"; 
+   allow-transfer { 172.25.0.11; };
+};
+

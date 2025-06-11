@@ -1,0 +1,7 @@
+
+zone "marcoaravena.cl"
+{  type slave;
+   masters { 172.25.0.10; };
+   file "/etc/bind/slave/marcoaravena.cl"; 
+};
+
